@@ -64,15 +64,11 @@ class PrintImageOnePixelPerLine(PrintImage):
 
         numpydata = asarray(image)
 
-        y_index = 0
-        for rows in numpydata:
-            x_index = 0
-            for pixel in rows:
+        for y_index, rows in enumerate(numpydata):
+            for x_index, pixel in enumerate(rows):
                 if x_index * 2 < columns:
                     self.print_pixel_grey(x_index, y_index, pixel)
-                x_index += 1
             print(self._reset)
-            y_index += 1
 
     # -------------------------------------------------------------------------
 
@@ -82,15 +78,11 @@ class PrintImageOnePixelPerLine(PrintImage):
         image_rgba = image.convert('RGBA')
         numpydata = asarray(image_rgba)
 
-        y_index = 0
-        for rows in numpydata:
-            x_index = 0
-            for pixel in rows:
+        for y_index, rows in enumerate(numpydata):
+            for x_index, pixel in enumerate(rows):
                 if x_index * 2 < columns:
                     self.print_pixel_rgba(x_index, y_index, pixel)
-                x_index += 1
             print(self._reset)
-            y_index += 1
 
     # -------------------------------------------------------------------------
 
@@ -280,7 +272,6 @@ class PrintImageTwoPixelsPerLineTrueColour(PrintImageTwoPixelsPerLine):
         pixel2 = [ pixel2, pixel2, pixel2 ]
 
         self.print_pixels_rgb(x_index, y_index, pixel1, pixel2)
-
 
     # -------------------------------------------------------------------------
 
@@ -556,3 +547,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
